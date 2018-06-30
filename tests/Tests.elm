@@ -20,7 +20,7 @@ import Test exposing (..)
 suite : Test
 suite =
     describe "All"
-        [ only T1_Numbers.suite
+        [ T1_Numbers.suite
         , T2_Booleans.suite
         , T3_Strings.suite
         , T4_Tuples.suite
@@ -28,6 +28,6 @@ suite =
         , T6_Functions.suite
         , T7_Lists.suite
         , T8_Maybes.suite
-        , T9_Unions.suite
+        , only T9_Unions.suite
         , T10_Decoders.suite
         ]

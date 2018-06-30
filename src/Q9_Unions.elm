@@ -38,7 +38,7 @@ greet lang =
             "Hello"
 
         Fr ->
-            Debug.crash "TODO"
+            "Bonjour"
 
 
 {-| 全ての言語を挨拶と組にしたリストを作ります
@@ -46,7 +46,7 @@ greet lang =
 listGreetings : (Language -> String) -> List ( Language, String )
 listGreetings toGreeting =
     [ Ja, En, Fr ]
-        |> Debug.crash "TODO"
+        |> List.map (\lang -> ( lang, greet lang ))
 
 
 {-| ユーザーを表す `User` 型です。
@@ -73,21 +73,21 @@ message user =
 -}
 makeLoginUser : String -> User
 makeLoginUser name =
-    Debug.crash "TODO"
+    LoggedIn name
 
 
 {-| 名前のリストを受け取ってログインユーザーのリストを返します
 -}
 makeLoginUsers : List String -> List User
 makeLoginUsers names =
-    Debug.crash "TODO"
+    List.map LoggedIn names
 
 
 {-| ゲストかどうかを判定します
 -}
 isGuest : User -> Bool
 isGuest user =
-    user == Debug.crash "TODO"
+    user == Guest
 
 
 {-| リクエストの処理状態を表します。`a` は任意の型です。
@@ -115,7 +115,12 @@ type alias Article =
 -}
 isLoading : FetchState a -> Bool
 isLoading state =
-    Debug.crash "TODO"
+    case state of
+        Loading _ ->
+            True
+
+        _ ->
+            False
 
 
 {-| サーバーから取得した記事の一覧です。
@@ -132,7 +137,7 @@ viewArticles state =
 
         Success _ articles ->
             articles
-                |> Debug.crash "TODO"
+                |> List.map .title
                 |> String.join "\n"
 
         Failure url error ->
